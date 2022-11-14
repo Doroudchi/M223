@@ -1,0 +1,8 @@
+package com.example.jwt.domain.ordering;
+
+import java.util.List;
+
+public interface OrderingService {
+    Ordering save(Ordering ordering);
+    List<Ordering> findAll();
+}

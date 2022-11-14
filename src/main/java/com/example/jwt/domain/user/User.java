@@ -3,6 +3,7 @@ package com.example.jwt.domain.user;
 import com.example.jwt.core.generic.ExtendedAuditEntity;
 import com.example.jwt.core.generic.ExtendedEntity;
 import com.example.jwt.domain.role.Role;
+import 
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,6 +26,10 @@ public class User extends ExtendedAuditEntity {
     @Column(name = "password")
     private String password;
 
+    @TenantID
+    private String tenant;
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_role",
@@ -36,6 +41,7 @@ public class User extends ExtendedAuditEntity {
     public User() {
     }
 
+
     public User(UUID id, String firstName, String lastName, String email, String password, Set<Role> roles) {
         super(id);
         this.firstName = firstName;
@@ -43,6 +49,15 @@ public class User extends ExtendedAuditEntity {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.tenant= tenant;
+    }
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
     }
 
     public String getFirstName() {
